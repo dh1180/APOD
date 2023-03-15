@@ -4,8 +4,8 @@
 	{
 		public int Id { get; set; }
 		public string? Title { get; set; }
-		public string? date { get; set; }
-		public string? explanation { get; set; }
-		public string? hdurl { get; set; }
+		public string? Date { get; set; }
+		public string? Explanation { get; set; }
+		public string? Hdurl { get; set; }
 	}
 }

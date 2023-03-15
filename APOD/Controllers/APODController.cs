@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using APOD.Data;
 using APOD.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+
 
 namespace APOD.Controllers
 {
@@ -19,10 +23,26 @@ namespace APOD.Controllers
             _context = context;
         }
 
-        // GET: APODs
+        // GET: APOD
         public async Task<IActionResult> Index()
         {
-              return _context.APOD != null ? 
+            using var httpClient = new HttpClient();
+            var apiKey = "qGLChofuLpstXN2oFvwUGl7nmIdKmRMSy3sEiLuR";
+            var apiUrl = $"https://api.nasa.gov/planetary/apod?api_key={apiKey}";
+            var response = await httpClient.GetAsync(apiUrl);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            var json = JObject.Parse(responseContent);
+
+            var model = new APODModel
+            {
+                Hdurl = (string)json["hdurl"],
+                Title = (string)json["title"],
+                Explanation = (string)json["explanation"],
+                Date = (string)json["date"]
+            };
+
+            return _context.APOD != null ? 
                           View(await _context.APOD.ToListAsync()) :
                           Problem("Entity set 'APODContext.APOD'  is null.");
         }
