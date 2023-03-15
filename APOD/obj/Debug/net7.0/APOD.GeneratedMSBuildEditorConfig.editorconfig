@@ -16,24 +16,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\mjdh1\source\repos\APOD\APOD
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APODs/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRHNcQ3JlYXRlLmNzaHRtbA==
+[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APOD/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APODs/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRHNcRGVsZXRlLmNzaHRtbA==
+[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APOD/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APODs/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRHNcRGV0YWlscy5jc2h0bWw=
+[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APOD/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APODs/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRHNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APODs/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRHNcSW5kZXguY3NodG1s
+[C:/Users/mjdh1/source/repos/APOD/APOD/Views/APOD/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVBPRFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mjdh1/source/repos/APOD/APOD/Views/APOD/Index.cshtml]

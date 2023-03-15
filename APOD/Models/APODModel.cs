@@ -1,6 +1,6 @@
 ﻿namespace APOD.Models
 {
-	public class APOD
+	public class APODModel
 	{
 		public int Id { get; set; }
 		public string? Title { get; set; }

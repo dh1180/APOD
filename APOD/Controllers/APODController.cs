@@ -10,11 +10,11 @@ using APOD.Models;
 
 namespace APOD.Controllers
 {
-    public class APODsController : Controller
+    public class APODController : Controller
     {
         private readonly APODContext _context;
 
-        public APODsController(APODContext context)
+        public APODController(APODContext context)
         {
             _context = context;
         }
@@ -56,7 +56,7 @@ namespace APOD.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,date,explanation,hdurl")] APOD aPOD)
+        public async Task<IActionResult> Create([Bind("Id,Title,date,explanation,hdurl")] APODModel aPOD)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace APOD.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,date,explanation,hdurl")] APOD aPOD)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,date,explanation,hdurl")] APODModel aPOD)
         {
             if (id != aPOD.Id)
             {
