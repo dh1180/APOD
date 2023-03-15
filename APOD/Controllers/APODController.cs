@@ -42,20 +42,21 @@ namespace APOD.Controllers
                 Date = (string)json["date"]
             };
 
-            return _context.APOD != null ? 
-                          View(await _context.APOD.ToListAsync()) :
-                          Problem("Entity set 'APODContext.APOD'  is null.");
+            _context.Add(model);
+            await _context.SaveChangesAsync();
+            
+            return View(await _context.APODModel.ToListAsync());
         }
 
         // GET: APODs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.APOD == null)
+            if (id == null || _context.APODModel == null)
             {
                 return NotFound();
             }
 
-            var aPOD = await _context.APOD
+            var aPOD = await _context.APODModel
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (aPOD == null)
             {
@@ -90,12 +91,12 @@ namespace APOD.Controllers
         // GET: APODs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.APOD == null)
+            if (id == null || _context.APODModel == null)
             {
                 return NotFound();
             }
 
-            var aPOD = await _context.APOD.FindAsync(id);
+            var aPOD = await _context.APODModel.FindAsync(id);
             if (aPOD == null)
             {
                 return NotFound();
@@ -141,12 +142,12 @@ namespace APOD.Controllers
         // GET: APODs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.APOD == null)
+            if (id == null || _context.APODModel == null)
             {
                 return NotFound();
             }
 
-            var aPOD = await _context.APOD
+            var aPOD = await _context.APODModel
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (aPOD == null)
             {
@@ -161,14 +162,14 @@ namespace APOD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.APOD == null)
+            if (_context.APODModel == null)
             {
                 return Problem("Entity set 'APODContext.APOD'  is null.");
             }
-            var aPOD = await _context.APOD.FindAsync(id);
+            var aPOD = await _context.APODModel.FindAsync(id);
             if (aPOD != null)
             {
-                _context.APOD.Remove(aPOD);
+                _context.APODModel.Remove(aPOD);
             }
             
             await _context.SaveChangesAsync();
@@ -177,7 +178,7 @@ namespace APOD.Controllers
 
         private bool APODExists(int id)
         {
-          return (_context.APOD?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.APODModel?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
