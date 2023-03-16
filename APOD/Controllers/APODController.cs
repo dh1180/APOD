@@ -24,7 +24,7 @@ namespace APOD.Controllers
         }
 
         // GET: APOD
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             using var httpClient = new HttpClient();
             var apiKey = "qGLChofuLpstXN2oFvwUGl7nmIdKmRMSy3sEiLuR";
@@ -50,7 +50,12 @@ namespace APOD.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return View(await _context.APODModel.ToListAsync());
+            int pageSize = 10;
+            int pageNumber = page;
+
+            ViewData["page"] = pageNumber;
+
+            return View(await _context.APODModel.OrderByDescending(APOD => APOD.Date).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync());
         }
 
         // GET: APODs/Details/5
