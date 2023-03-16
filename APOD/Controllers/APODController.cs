@@ -42,9 +42,14 @@ namespace APOD.Controllers
                 Date = (string)json["date"]
             };
 
-            _context.Add(model);
-            await _context.SaveChangesAsync();
+            var apodList = _context.APODModel.Where(APOD => APOD.Title == model.Title).ToList();
             
+            if(apodList.Count == 0)
+            {
+                _context.Add(model);
+                await _context.SaveChangesAsync();
+            }
+
             return View(await _context.APODModel.ToListAsync());
         }
 
