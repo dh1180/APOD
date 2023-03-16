@@ -54,7 +54,14 @@
 </table>
 
 <form asp-controller="APOD" asp-action="Index" method="get">
-    <button type="submit" name="page" value="@ViewData["page"]">@ViewData["page"]</button>
-    <button type="submit" name="page" value="@((int)ViewData["page"]+1)">@((int)ViewData["page"]+1)</button>
-    <button type="submit" name="page" value="@((int)ViewData["page"]+2)">@((int)ViewData["page"] + 2)</button>
+    <button type="submit" value="1">&laquo;</button>
+    @for(int i = 0; i < 3; i++)
+    {
+        @if ((int)ViewData["CurrentPage"] + i <= Convert.ToInt32(ViewData["TotalPage"]))
+        {
+        <button type="submit" name="page"
+            value="@((int)ViewData["CurrentPage"] + i)">@((int)ViewData["CurrentPage"] + i)</button>
+        }
+    }
+    <button type="submit" value="@(Convert.ToInt32(ViewData["TotalPage"]))">&raquo;</button>
 </form>

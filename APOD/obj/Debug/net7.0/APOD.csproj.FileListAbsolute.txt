@@ -273,3 +273,5 @@ C:\Users\mjdh1\source\repos\APOD\APOD\bin\Debug\net7.0\runtimes\win\lib\netstand
 C:\Users\mjdh1\source\repos\APOD\APOD\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\mjdh1\source\repos\APOD\APOD\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\mjdh1\source\repos\APOD\APOD\obj\Debug\net7.0\APOD.csproj.CopyComplete
+C:\Users\mjdh1\source\repos\APOD\APOD\bin\Debug\net7.0\PagedList.dll
+C:\Users\mjdh1\source\repos\APOD\APOD\bin\Debug\net7.0\PagedList.Mvc.dll

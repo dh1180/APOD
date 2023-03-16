@@ -10,7 +10,7 @@ using APOD.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-
+using PagedList;
 
 namespace APOD.Controllers
 {
@@ -24,7 +24,7 @@ namespace APOD.Controllers
         }
 
         // GET: APOD
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(int? page)
         {
             using var httpClient = new HttpClient();
             var apiKey = "qGLChofuLpstXN2oFvwUGl7nmIdKmRMSy3sEiLuR";
@@ -50,12 +50,17 @@ namespace APOD.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            int pageSize = 10;
-            int pageNumber = page;
+            int pageSize = 1;
+            int pageNumber = page ?? 1;
 
-            ViewData["page"] = pageNumber;
+            ViewData["CurrentPage"] = pageNumber;
+            ViewData["TotalPage"] = Math.Ceiling((double)_context.APODModel.Count() / pageSize); ;
 
-            return View(await _context.APODModel.OrderByDescending(APOD => APOD.Date).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync());
+            return View(await _context.APODModel
+                .OrderByDescending(APOD => APOD.Date)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync());
         }
 
         // GET: APODs/Details/5
