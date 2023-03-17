@@ -15,5 +15,6 @@
     <WebStackScaffolding_DbContextTypeFullName>APOD.Data.APODContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>C:\Users\mjdh1\source\repos\APOD\APOD\Properties\PublishProfiles\APOD1936 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

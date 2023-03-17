@@ -50,7 +50,7 @@ namespace APOD.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            int pageSize = 1;
+            int pageSize = 10;
             int pageNumber = page ?? 1;
 
             ViewData["CurrentPage"] = pageNumber;
