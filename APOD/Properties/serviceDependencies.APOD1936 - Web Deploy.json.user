@@ -1,0 +1,45 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2023-03-18T07:42:10.9114774Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "40065896-9eaa-4e23-afec-ceda6ec0650b"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "APOD"
+    },
+    "subscriptionId": {
+      "Name": "subscriptionId",
+      "Type": "subscription",
+      "Value": "40065896-9eaa-4e23-afec-ceda6ec0650b"
+    },
+    "APOD1936.resourceName": {
+      "Name": "APOD1936.resourceName",
+      "Type": null,
+      "Value": "APOD1936"
+    },
+    "APOD1936.resourceGroupName": {
+      "Name": "APOD1936.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "APOD"
+    },
+    "APOD1936.subscriptionId": {
+      "Name": "APOD1936.subscriptionId",
+      "Type": "subscription",
+      "Value": "40065896-9eaa-4e23-afec-ceda6ec0650b"
+    },
+    "APOD1936.resourceGroupLocation": {
+      "Name": "APOD1936.resourceGroupLocation",
+      "Type": null,
+      "Value": "eastus"
+    }
+  }
+}

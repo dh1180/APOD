@@ -29,21 +29,21 @@ namespace APOD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Explanation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Hdurl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("date")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("explanation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("hdurl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("APOD");
+                    b.ToTable("APODModel");
                 });
 #pragma warning restore 612, 618
         }
