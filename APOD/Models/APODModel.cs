@@ -7,5 +7,6 @@
 		public string? Date { get; set; }
 		public string? Explanation { get; set; }
 		public string? Hdurl { get; set; }
+		public List<CommentModel>? Comments { get; set; } = new List<CommentModel>();
 	}
 }

@@ -15,5 +15,7 @@ namespace APOD.Data
         }
 
         public DbSet<APOD.Models.APODModel> APODModel { get; set; } = default!;
+
+        public DbSet<APOD.Models.CommentModel> CommentModel { get; set; } = default!;
     }
 }

@@ -14,6 +14,12 @@ using PagedList;
 
 namespace APOD.Controllers
 {
+    public class APODAndCommentViewModel
+    {
+        public APODModel APOD { get; set; }
+        public CommentModel Comment { get; set; }
+    }
+
     public class APODController : Controller
     {
         private readonly APODContext _context;
@@ -64,6 +70,7 @@ namespace APOD.Controllers
         }
 
         // GET: APODs/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.APODModel == null)
@@ -71,14 +78,36 @@ namespace APOD.Controllers
                 return NotFound();
             }
 
-            var aPOD = await _context.APODModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (aPOD == null)
+            var apodModel = await _context.APODModel.Include(p => p.Comments).FirstOrDefaultAsync(m => m.Id == id);
+            if (apodModel == null)
             {
                 return NotFound();
             }
 
-            return View(aPOD);
+            var viewModel = new APODAndCommentViewModel
+            {
+                APOD = apodModel,
+                Comment = new CommentModel()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Details(int id, [Bind("APOD, Comment")] APODAndCommentViewModel commentModel)
+        {
+
+                commentModel.Comment.Date = DateTime.Now;
+                commentModel.Comment.PostId = id;
+
+                _context.CommentModel.Add(commentModel.Comment);
+
+                var apodModel = await _context.APODModel.Include(p => p.Comments).FirstOrDefaultAsync(m => m.Id == id);
+                apodModel.Comments.Add(commentModel.Comment);
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Details), new { id = commentModel.Comment.PostId });
         }
 
         // GET: APODs/Create
