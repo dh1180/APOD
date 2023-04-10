@@ -46,8 +46,8 @@
             <li>@comment.Author</li>
             <li>@comment.Date</li>
             <li>@comment.Contents</li>
-            <a asp-action="Edit" asp-route-id="@comment.Id">Edit</a>
-            <a asp-action="Delete" asp-route-id="@comment.Id">Delete</a>
+            <a asp-action="Edit" asp-route-id="@comment.Id" asp-route-postid="@Model.APOD.Id">Edit</a>
+            <a asp-action="Delete_Comment" asp-route-id="@comment.Id" asp-route-postid="@Model.APOD.Id">Delete</a>
         }
     }
 </ul>

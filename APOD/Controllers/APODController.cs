@@ -220,6 +220,18 @@ namespace APOD.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Delete_Comment(int id, int postid)
+        {
+            var apodModel = await _context.APODModel.FindAsync(postid);
+            var commentModel = await _context.CommentModel.FindAsync(id);
+            if (commentModel != null) {
+                apodModel.Comments.RemoveAll(m => m.Id == id);
+                _context.CommentModel.Remove(commentModel);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Details), new {id = postid});
+        }
+
         private bool APODExists(int id)
         {
           return (_context.APODModel?.Any(e => e.Id == id)).GetValueOrDefault();
