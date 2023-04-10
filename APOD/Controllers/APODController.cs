@@ -11,13 +11,15 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using PagedList;
+using System.Diagnostics.Contracts;
 
 namespace APOD.Controllers
 {
     public class APODAndCommentViewModel
     {
         public APODModel APOD { get; set; }
-        public CommentModel Comment { get; set; }
+        public CommentModel New_Comment { get; set; }
+        public List<CommentModel> Comment { get; set; }
     }
 
     public class APODController : Controller
@@ -43,6 +45,7 @@ namespace APOD.Controllers
             var model = new APODModel
             {
                 Hdurl = (string)json["hdurl"],
+                Url = (string)json["url"],
                 Title = (string)json["title"],
                 Explanation = (string)json["explanation"],
                 Date = (string)json["date"]
@@ -78,36 +81,34 @@ namespace APOD.Controllers
                 return NotFound();
             }
 
-            var apodModel = await _context.APODModel.Include(p => p.Comments).FirstOrDefaultAsync(m => m.Id == id);
+            var apodModel = await _context.APODModel.FirstOrDefaultAsync(m => m.Id == id);
             if (apodModel == null)
             {
                 return NotFound();
             }
 
+            var commentModel = _context.CommentModel.Where(c => c.PostId == id).ToList();
             var viewModel = new APODAndCommentViewModel
             {
                 APOD = apodModel,
-                Comment = new CommentModel()
+                New_Comment = new CommentModel(),
+                Comment = commentModel,
             };
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Details(int id, [Bind("APOD, Comment")] APODAndCommentViewModel commentModel)
+        public async Task<IActionResult> Details(int id, [Bind("APOD,New_Comment,Comment")] APODAndCommentViewModel commentModel)
         {
+                commentModel.New_Comment.Date = DateTime.Now;
+                commentModel.New_Comment.PostId = id;
 
-                commentModel.Comment.Date = DateTime.Now;
-                commentModel.Comment.PostId = id;
-
-                _context.CommentModel.Add(commentModel.Comment);
-
-                var apodModel = await _context.APODModel.Include(p => p.Comments).FirstOrDefaultAsync(m => m.Id == id);
-                apodModel.Comments.Add(commentModel.Comment);
+                _context.CommentModel.Add(commentModel.New_Comment);
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Details), new { id = commentModel.Comment.PostId });
+                return RedirectToAction(nameof(Details), new { id = commentModel.New_Comment.PostId });
         }
 
         // GET: APODs/Create
@@ -222,10 +223,8 @@ namespace APOD.Controllers
 
         public async Task<IActionResult> Delete_Comment(int id, int postid)
         {
-            var apodModel = await _context.APODModel.FindAsync(postid);
             var commentModel = await _context.CommentModel.FindAsync(id);
             if (commentModel != null) {
-                apodModel.Comments.RemoveAll(m => m.Id == id);
                 _context.CommentModel.Remove(commentModel);
             }
             await _context.SaveChangesAsync();

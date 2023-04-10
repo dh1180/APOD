@@ -38,10 +38,32 @@
     </dl>
 </div>
 
+<form asp-action="Details" asp-route-id="@Model.APOD.Id">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="New_Comment.Author" class="control-label"></label>
+        <input asp-for="New_Comment.Author" class="form-control" />
+        <span asp-validation-for="New_Comment.Author" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="New_Comment.Password" class="control-label"></label>
+        <input asp-for="New_Comment.Password" class="form-control" />
+        <span asp-validation-for="New_Comment.Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="New_Comment.Contents" class="control-label"></label>
+        <input asp-for="New_Comment.Contents" class="form-control" />
+        <span asp-validation-for="New_Comment.Contents" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="댓글달기" class="btn btn-primary" />
+    </div>
+</form>
+
 <ul>
-    @if(Model.APOD.Comments != null)
+    @if(Model.Comment != null)
     {
-        foreach(var comment in Model.APOD.Comments)
+        foreach(var comment in Model.Comment)
         {
             <li>@comment.Author</li>
             <li>@comment.Date</li>
@@ -51,28 +73,6 @@
         }
     }
 </ul>
-
-<form asp-action="Details" asp-route-id="@Model.APOD.Id">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Comment.Author" class="control-label"></label>
-        <input asp-for="Comment.Author" class="form-control" />
-        <span asp-validation-for="Comment.Author" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Comment.Password" class="control-label"></label>
-        <input asp-for="Comment.Password" class="form-control" />
-        <span asp-validation-for="Comment.Password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Comment.Contents" class="control-label"></label>
-        <input asp-for="Comment.Contents" class="form-control" />
-        <span asp-validation-for="Comment.Contents" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="댓글달기" class="btn btn-primary" />
-    </div>
-</form>
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model.APOD.Id">Edit</a> |

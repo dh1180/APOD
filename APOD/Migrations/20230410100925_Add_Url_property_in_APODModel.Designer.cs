@@ -4,6 +4,7 @@ using APOD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APOD.Migrations
 {
     [DbContext(typeof(APODContext))]
-    partial class APODContextModelSnapshot : ModelSnapshot
+    [Migration("20230410100925_Add_Url_property_in_APODModel")]
+    partial class Add_Url_property_in_APODModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +61,9 @@ namespace APOD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("APODModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -78,7 +84,21 @@ namespace APOD.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("APODModelId");
+
                     b.ToTable("CommentModel");
+                });
+
+            modelBuilder.Entity("APOD.Models.CommentModel", b =>
+                {
+                    b.HasOne("APOD.Models.APODModel", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("APODModelId");
+                });
+
+            modelBuilder.Entity("APOD.Models.APODModel", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
