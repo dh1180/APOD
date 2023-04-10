@@ -87,7 +87,7 @@ namespace APOD.Controllers
                 return NotFound();
             }
 
-            var commentModel = _context.CommentModel.Where(c => c.PostId == id).ToList();
+            var commentModel = _context.CommentModel.Where(c => c.PostId == id).OrderByDescending(d => d.Date).ToList();
             var viewModel = new APODAndCommentViewModel
             {
                 APOD = apodModel,

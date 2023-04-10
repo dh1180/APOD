@@ -1,80 +1,91 @@
 ﻿@model APOD.Controllers.APODAndCommentViewModel
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
 <h1>Details</h1>
 
 <div>
-    <h4>APOD</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.APOD.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.APOD.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.APOD.Date)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.APOD.Date)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.APOD.Explanation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.APOD.Explanation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.APOD.Hdurl)
-        </dt>
-        <dd class = "col-sm-10">
-            <img src="@Html.DisplayFor(model => model.APOD.Hdurl)"
-                 style="max-width: 400px; height: auto;" alt="image" />
-        </dd>
-    </dl>
+	<h4>APOD</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.APOD.Title)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.APOD.Title)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.APOD.Date)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.APOD.Date)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.APOD.Explanation)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.APOD.Explanation)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.APOD.Hdurl)
+		</dt>
+		<dd class="col-sm-10">
+			<img src="@Html.DisplayFor(model => model.APOD.Hdurl)"
+				 style="max-width: 400px; height: auto;" alt="image" />
+		</dd>
+	</dl>
 </div>
 
 <form asp-action="Details" asp-route-id="@Model.APOD.Id">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="New_Comment.Author" class="control-label"></label>
-        <input asp-for="New_Comment.Author" class="form-control" />
-        <span asp-validation-for="New_Comment.Author" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="New_Comment.Password" class="control-label"></label>
-        <input asp-for="New_Comment.Password" class="form-control" />
-        <span asp-validation-for="New_Comment.Password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="New_Comment.Contents" class="control-label"></label>
-        <input asp-for="New_Comment.Contents" class="form-control" />
-        <span asp-validation-for="New_Comment.Contents" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="댓글달기" class="btn btn-primary" />
-    </div>
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+	<div class="card">
+		<div class="card-body container">
+			<div class="row">
+				<div class="col-1">
+					<input asp-for="New_Comment.Author" class="form-control" placeholder="작성자" />
+					<span asp-validation-for="New_Comment.Author" class="text-danger"></span>
+				</div>
+				<div class="col-1">
+					<input asp-for="New_Comment.Password" class="form-control" placeholder="비밀번호" />
+					<span asp-validation-for="New_Comment.Password" class="text-danger"></span>
+				</div>
+
+			</div>
+			<br />
+			<textarea asp-for="New_Comment.Contents" class="form-control" placeholder="댓글 입력.." rows="3"></textarea>
+			<span asp-validation-for="New_Comment.Contents" class="text-danger"></span>
+			<br />
+			<input type="submit" value="댓글 등록" class="btn btn-primary" />
+
+		</div>
+	</div>
 </form>
 
-<ul>
-    @if(Model.Comment != null)
-    {
-        foreach(var comment in Model.Comment)
-        {
-            <li>@comment.Author</li>
-            <li>@comment.Date</li>
-            <li>@comment.Contents</li>
-            <a asp-action="Edit" asp-route-id="@comment.Id" asp-route-postid="@Model.APOD.Id">Edit</a>
-            <a asp-action="Delete_Comment" asp-route-id="@comment.Id" asp-route-postid="@Model.APOD.Id">Delete</a>
-        }
-    }
-</ul>
+<div class="container">
+	@if (Model.Comment != null)
+	{
+		foreach (var comment in Model.Comment)
+		{
+			<div class="row">
+				<div class="col-1">
+					<span class="align-baseline">@comment.Author</span>
+				</div>
+				<div class="col-8">
+					<span class="align-baseline">@comment.Contents</span>
+				</div>
+				<div class="col-3">
+					<span class="align-baseline">@comment.Date</span>
+					<a asp-action="Delete_Comment" asp-route-id="@comment.Id" asp-route-postid="@Model.APOD.Id">Delete</a>
+				</div>
+			</div>
+			<hr />
+		}
+	}
+</div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.APOD.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+	<a asp-action="Index">Back to List</a>
 </div>
