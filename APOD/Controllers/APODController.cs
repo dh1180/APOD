@@ -221,15 +221,25 @@ namespace APOD.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Delete_Comment(int id, int postid)
+        public async Task<IActionResult> Delete_Comment(int id, int postid, string password)
         {
-            var commentModel = await _context.CommentModel.FindAsync(id);
+
+			var commentModel = await _context.CommentModel.FindAsync(id);
             if (commentModel != null) {
-                _context.CommentModel.Remove(commentModel);
+                if(password == commentModel.Password) {
+					_context.CommentModel.Remove(commentModel);
+					await _context.SaveChangesAsync();
+					return RedirectToAction(nameof(Details), new { id = postid });
+				}
+                else
+                {
+					TempData["msg"] = "<script>alert('비밀번호가 일치하지 않습니다.');</script>";
+					return RedirectToAction(nameof(Details), new { id = postid });
+				}
             }
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), new {id = postid});
-        }
+			TempData["msg"] = "<script>alert('비밀번호가 일치하지 않습니다.');</script>";
+			return RedirectToAction(nameof(Details), new { id = postid });
+		}
 
         private bool APODExists(int id)
         {

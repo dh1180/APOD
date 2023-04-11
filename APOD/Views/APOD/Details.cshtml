@@ -43,7 +43,7 @@
 
 	<div class="card">
 		<div class="card-body container">
-			<div class="row">
+			<div class="row mb-3">
 				<div class="col-1">
 					<input asp-for="New_Comment.Author" class="form-control" placeholder="작성자" />
 					<span asp-validation-for="New_Comment.Author" class="text-danger"></span>
@@ -54,10 +54,12 @@
 				</div>
 
 			</div>
-			<br />
-			<textarea asp-for="New_Comment.Contents" class="form-control" placeholder="댓글 입력.." rows="3"></textarea>
-			<span asp-validation-for="New_Comment.Contents" class="text-danger"></span>
-			<br />
+			<div class="mb-3">
+				<textarea asp-for="New_Comment.Contents" class="form-control" placeholder="댓글 입력.." rows="3"></textarea>
+			</div>
+			<div class="mb-3">
+				<span asp-validation-for="New_Comment.Contents" class="text-danger"></span>
+			</div>
 			<input type="submit" value="댓글 등록" class="btn btn-primary" />
 
 		</div>
@@ -78,7 +80,22 @@
 				</div>
 				<div class="col-3">
 					<span class="align-baseline">@comment.Date</span>
-					<a asp-action="Delete_Comment" asp-route-id="@comment.Id" asp-route-postid="@Model.APOD.Id">Delete</a>
+
+					<form asp-action="Delete_Comment" asp-route-id="@comment.Id" asp-route-postid="@Model.APOD.Id">
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+						<div class="dropdown">
+							<a class="btn btn-outline-danger btn-sm" data-bs-toggle="dropdown">Delete</a>
+
+							<ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuLink">
+								<li>
+									<input class="form-control" name="password" placeholder="비밀번호 입력" />
+									<input type="submit" value="댓글 삭제" class="btn btn-primary" />
+								</li>
+							</ul>
+
+						</div>
+					</form>
+
 				</div>
 			</div>
 			<hr />
@@ -86,6 +103,4 @@
 	}
 </div>
 
-<div>
-	<a asp-action="Index">Back to List</a>
-</div>
+@Html.Raw(TempData["msg"])
