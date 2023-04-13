@@ -51,15 +51,15 @@ namespace APOD.Controllers
                 Date = (string)json["date"]
             };
 
-            var apodList = _context.APODModel.Where(APOD => APOD.Title == model.Title).ToList();
+            var apodList = _context.APODModel.Where(APOD => APOD.Title == model.Title).FirstOrDefault();
             
-            if(apodList.Count == 0)
+            if(apodList == null)
             {
                 _context.Add(model);
                 await _context.SaveChangesAsync();
             }
 
-            int pageSize = 5;
+            int pageSize = 12;
             int pageNumber = page ?? 1;
 
             ViewData["CurrentPage"] = pageNumber;

@@ -4,39 +4,11 @@
 	ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Html.DisplayFor(model => model.APOD.Title)</h1>
+<h5 class="mb-3">@Html.DisplayFor(model => model.APOD.Date)</h5>
+<h5 class="mb-3">@Html.DisplayFor(model => model.APOD.Explanation)</h5>
+<img class="mb-3" src="@Html.DisplayFor(model => model.APOD.Url)" />
 
-<div>
-	<h4>APOD</h4>
-	<hr />
-	<dl class="row">
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.APOD.Title)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.APOD.Title)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.APOD.Date)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.APOD.Date)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.APOD.Explanation)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.APOD.Explanation)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.APOD.Hdurl)
-		</dt>
-		<dd class="col-sm-10">
-			<img src="@Html.DisplayFor(model => model.APOD.Hdurl)"
-				 style="max-width: 400px; height: auto;" alt="image" />
-		</dd>
-	</dl>
-</div>
 
 <form asp-action="Details" asp-route-id="@Model.APOD.Id">
 	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
