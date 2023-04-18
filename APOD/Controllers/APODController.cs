@@ -42,24 +42,22 @@ namespace APOD.Controllers
 
             var json = JObject.Parse(responseContent);
 
-            var model = new APODModel
-            {
-                Hdurl = (string)json["hdurl"],
-                Url = (string)json["url"],
-                Title = (string)json["title"],
-                Explanation = (string)json["explanation"],
-                Date = (string)json["date"]
-            };
+			var model = new APODModel
+			{
+				Url = (string)json["url"],
+				Title = (string)json["title"],
+				Explanation = (string)json["explanation"],
+				Date = (string)json["date"]
+			};
+			var apodList = _context.APODModel.Where(APOD => APOD.Title == model.Title).FirstOrDefault();
 
-            var apodList = _context.APODModel.Where(APOD => APOD.Title == model.Title).FirstOrDefault();
-            
-            if(apodList == null)
-            {
-                _context.Add(model);
-                await _context.SaveChangesAsync();
-            }
+			if (apodList == null)
+			{
+				_context.Add(model);
+				await _context.SaveChangesAsync();
+			}
 
-            int pageSize = 12;
+			int pageSize = 12;
             int pageNumber = page ?? 1;
 
             ViewData["CurrentPage"] = pageNumber;
@@ -122,7 +120,7 @@ namespace APOD.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,date,explanation,hdurl")] APODModel aPOD)
+        public async Task<IActionResult> Create([Bind("Id,Title,date,explanation")] APODModel aPOD)
         {
             if (ModelState.IsValid)
             {
@@ -154,7 +152,7 @@ namespace APOD.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,date,explanation,hdurl")] APODModel aPOD)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,date,explanation")] APODModel aPOD)
         {
             if (id != aPOD.Id)
             {
