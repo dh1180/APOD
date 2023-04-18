@@ -8,8 +8,17 @@
 <h5 class="mb-3">@Html.DisplayFor(model => model.APOD.Date)</h5>
 <hr />
 <h5 class="mb-3">@Html.DisplayFor(model => model.APOD.Explanation)</h5>
-<img class="mb-3" src="@Html.DisplayFor(model => model.APOD.Url)" />
+<img id="media-container" src="@Html.DisplayFor(model => model.APOD.Url)" onerror="showIframe()" />
 
+
+<script>
+	function showIframe() {
+		var container = document.getElementById("media-container");
+		var iframe = document.createElement("iframe");
+		iframe.src = "@Html.DisplayFor(model => model.APOD.Url)";
+		container.appendChild(iframe);
+	}
+</script>
 
 <form asp-action="Details" asp-route-id="@Model.APOD.Id">
 	<div asp-validation-summary="ModelOnly" class="text-danger"></div>

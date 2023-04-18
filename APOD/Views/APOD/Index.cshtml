@@ -11,7 +11,18 @@
 		{
 			<div class=" col-3 mb-5">
 				<div class="card border-secondary h-100">
-					<img src="@Html.DisplayFor(item => apod.Url)" class="card-img-top" alt="..." style="object-fit: cover; width: 300px; height: 150px">
+					<div id="media-container">
+						<img src="@Html.DisplayFor(item => apod.Url)" class="card-img-top" alt="..." style="object-fit: cover; width: 300px; height: 150px" onerror="showIframe()">
+					</div>
+
+					<script>
+						function showIframe() {
+							var container = document.getElementById("media-container");
+							var iframe = document.createElement("iframe");
+							iframe.src = "@Html.DisplayFor(item => apod.Url)";
+							container.appendChild(iframe);
+						}
+					</script>
 					<div class="card-body">
 						<p class="card-title">@Html.DisplayFor(item => apod.Title)</p>
 
