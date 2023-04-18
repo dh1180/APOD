@@ -8,14 +8,22 @@
 <h5 class="mb-3">@Html.DisplayFor(model => model.APOD.Date)</h5>
 <hr />
 <h5 class="mb-3">@Html.DisplayFor(model => model.APOD.Explanation)</h5>
-<img id="media-container" src="@Html.DisplayFor(model => model.APOD.Url)" onerror="showIframe()" />
-
+<div id="media-container">
+	<img id="media" src="@Html.DisplayFor(model => model.APOD.Url)" onerror="showIframe()"/>
+</div>
 
 <script>
 	function showIframe() {
 		var container = document.getElementById("media-container");
 		var iframe = document.createElement("iframe");
+		var img = document.getElementById("media");
+
 		iframe.src = "@Html.DisplayFor(model => model.APOD.Url)";
+		iframe.allowFullscreen = true;
+		iframe.width = "100%";
+		iframe.height = "100%";
+		
+		container.removeChild(img);
 		container.appendChild(iframe);
 	}
 </script>
