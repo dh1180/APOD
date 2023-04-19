@@ -99,14 +99,18 @@ namespace APOD.Controllers
         [HttpPost]
         public async Task<IActionResult> Details(int id, [Bind("APOD,New_Comment,Comment")] APODAndCommentViewModel commentModel)
         {
-                commentModel.New_Comment.Date = DateTime.Now;
-                commentModel.New_Comment.PostId = id;
+			DateTime utcNow = DateTime.UtcNow;
+			TimeZoneInfo kst = TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time");
+			DateTime kstNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, kst);
 
-                _context.CommentModel.Add(commentModel.New_Comment);
+			commentModel.New_Comment.Date = kstNow;
+            commentModel.New_Comment.PostId = id;
 
-                await _context.SaveChangesAsync();
+            _context.CommentModel.Add(commentModel.New_Comment);
 
-                return RedirectToAction(nameof(Details), new { id = commentModel.New_Comment.PostId });
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), new { id = commentModel.New_Comment.PostId });
         }
 
         // GET: APODs/Create
