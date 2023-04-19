@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace APOD.Models
 {
@@ -10,7 +11,9 @@ namespace APOD.Models
 		public string Password { get; set; }
 		public string Contents { get; set; }
 		public DateTime Date { get; set; }
+		
+		[ForeignKey("APODModel")]
 		public int PostId { get; set; }
-
+		public virtual APODModel APODModel { get; set; }
 	}
 }
