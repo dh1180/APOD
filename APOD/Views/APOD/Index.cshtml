@@ -49,7 +49,7 @@
 			<button class="page-link" type="submit" name="page" value=1>&laquo;</button>
 			@for (int i = 0; i < 5; i++)
 			{
-				if ((int)ViewData["CurrentPage"] == 1)
+				if ((int)ViewData["CurrentPage"] == 1 && (int)ViewData["CurrentPage"] + i <= Convert.ToInt32(ViewData["TotalPage"]))
 				{
 					if ((int)ViewData["CurrentPage"] == (int)ViewData["CurrentPage"] + i)
 					{
@@ -71,7 +71,7 @@
 					}
 				}
 
-				else if ((int)ViewData["CurrentPage"] == 2)
+				else if ((int)ViewData["CurrentPage"] == 2 && (int)ViewData["CurrentPage"] - 1 + i <= Convert.ToInt32(ViewData["TotalPage"]))
 				{
 					if ((int)ViewData["CurrentPage"] == (int)ViewData["CurrentPage"] - 1 + i)
 					{
@@ -91,7 +91,8 @@
 					}
 				}
 
-				else if ((int)ViewData["CurrentPage"] + i - 2 <= Convert.ToInt32(ViewData["TotalPage"]))
+				else if ((int)ViewData["CurrentPage"] + i - 2 <= Convert.ToInt32(ViewData["TotalPage"])
+				&& (int)ViewData["CurrentPage"] > 2)
 				{
 					if ((int)ViewData["CurrentPage"] == (int)ViewData["CurrentPage"] - 2 + i)
 					{
@@ -104,12 +105,12 @@
 					}
 					else
 					{
-
-						<button class="page-link" type="submit" name="page"
-					value="@((int)ViewData["CurrentPage"] - 2 + i)">
-							@((int)ViewData["CurrentPage"] - 2 + i)
-						</button>
+							<button class="page-link" type="submit" name="page"
+						value="@((int)ViewData["CurrentPage"] - 2 + i)">
+								@((int)ViewData["CurrentPage"] - 2 + i)
+							</button>
 					}
+
 				}
 			}
 			<button class="page-link" type="submit" name="page" value="@ViewData["TotalPage"]">&raquo;</button>
