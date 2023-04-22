@@ -17,8 +17,41 @@
 
 <div class="container">
     <h1 class="mb-5" style="color: cornflowerblue;"><b>Random NASA Image</b></h1>
-    <input class="form-control mb-3" type="text" onkeydown="handleKeyDown(event)" placeholder="랜덤으로 출력할 APOD의 개수를 입력하세요" />
+    <input class="form-control mb-3" type="text" onkeydown="handleKeyDown(event)" placeholder="Please enter the number of APOD to randomly output" />
     <div class="row" id="apod-container">
+    </div>
+</div>
+
+<script>
+    function handleClick(event, info) {
+        $("#modal-apod-title").empty()
+        $("#modal-apod-content").empty()
+        $("#modal-apod-img").empty()
+
+        $("#modal-apod-title").append(info[0])
+        $("#modal-apod-content").append(info[1])
+        var img =  '<img src="' + info[2] + '" class="card-img-top"' +
+            'onerror="showIframe(this, \'' + info[3] + '\')"/>'
+
+        $("#modal-apod-img").append(img)
+    }
+</script>
+
+<div class="modal fade" id="myModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="modal-apod-title"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 id="modal-apod-content"></h5>
+                <div class="media-container" id="modal-apod-img"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -38,23 +71,26 @@
                     success: function (result) {
                         $("#apod-container").empty();
                         for (var i = 0; i < result.length; i++) {
-
+                            var explanation = result[i].explanation;
+                            explanation = explanation.replace(/'/g, "&apos;");
+                            explanation = explanation.replace(/"/g, "&quot;");
                             var start = '<div class="col-3 mb-5">'
                                 + '<div class="card border-secondary h-100">'
 
                                 + '<div class="media-container">'
-                                + '<img src="' + result[i].url + '" class="card-img-top"'
-                                + 'style="object-fit: cover; height: 150px" onerror="showIframe(this, \'' + result[i].url + '\')"/>'
+                                + '<img src="' + result[i].url + '" class="card-img-top"' +
+                                'style="object-fit: cover; height: 150px" onerror="showIframe(this, \'' + result[i].url + '\')"/>'
                                 + '</div>'
 
                                 + '<div class="card-body">'
                                 + '<p class="card-title">' + result[i].title + '</p>'
                                 + '</div>'
 
-
+                                
 
                                 + '<div class="card-footer">'
-                                + '<button onclick="handleClick(event)">보기</button>'
+                                + '<a href="#" onclick="handleClick(event, [\`' + result[i].title + '\`, \`' + explanation + '\`, \`' + result[i].hdurl + 
+                                '\`, \'' + result[i].url + '\'])" data-bs-toggle="modal" data-bs-target="#myModal" style="text-decoration-line: none;">View</a>'
                                 + '</div>'
 
                                 + '</div> </div>';
@@ -63,7 +99,11 @@
 
                         }
 
+                    },
+                    error: function (error) {
+                        alert("Please enter the NUMBER")
                     }
+
                 })
             })
         }
