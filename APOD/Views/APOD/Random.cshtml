@@ -17,7 +17,7 @@
 
 <div class="container">
     <h1 class="mb-5" style="color: cornflowerblue;"><b>Random NASA Image</b></h1>
-    <input class="form-control mb-3" type="text" onkeydown="handleKeyDown(event)" placeholder="Please enter the number of APOD to randomly output" />
+    <input class="form-control mb-3" type="text" onkeydown="handleKeyDown(event)" placeholder="Please enter the number of APOD to randomly output. Max is 100." />
     <div class="row" id="apod-container">
     </div>
 </div>
@@ -25,13 +25,16 @@
 <script>
     function handleClick(event, info) {
         $("#modal-apod-title").empty()
+        $("#modal-apod-date").empty()
         $("#modal-apod-content").empty()
         $("#modal-apod-img").empty()
 
         $("#modal-apod-title").append(info[0])
-        $("#modal-apod-content").append(info[1])
-        var img =  '<img src="' + info[2] + '" class="card-img-top"' +
-            'onerror="showIframe(this, \'' + info[3] + '\')"/>'
+        $("#modal-apod-date").append(info[1])
+        $("#modal-apod-content").append(info[2])
+
+        var img =  '<img src="' + info[3] + '" class="card-img-top"' +
+            'onerror="showIframe(this, \'' + info[4] + '\')"/>'
 
         $("#modal-apod-img").append(img)
     }
@@ -45,11 +48,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <h5 id="modal-apod-date" class="mb-3"></h5>
                 <h5 id="modal-apod-content"></h5>
                 <div class="media-container" id="modal-apod-img"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -89,8 +93,8 @@
                                 
 
                                 + '<div class="card-footer">'
-                                + '<a href="#" onclick="handleClick(event, [\`' + result[i].title + '\`, \`' + explanation + '\`, \`' + result[i].hdurl + 
-                                '\`, \'' + result[i].url + '\'])" data-bs-toggle="modal" data-bs-target="#myModal" style="text-decoration-line: none;">View</a>'
+                                + '<a href="#" onclick="handleClick(event, [\`' + result[i].title + '\`, \'' + result[i].date + '\', \`' + explanation +
+                                '\`, \'' + result[i].hdurl + '\', \'' + result[i].url + '\'])" data-bs-toggle="modal" data-bs-target="#myModal" style="text-decoration-line: none;">View</a>'
                                 + '</div>'
 
                                 + '</div> </div>';

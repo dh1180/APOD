@@ -1,42 +1,45 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - APOD</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/APOD.styles.css" asp-append-version="true" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - APOD</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/APOD.styles.css" asp-append-version="true" />
 </head>
 <body style="background-color: " #333333">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="APOD" asp-action="Index"
-                   style="color: cornflowerblue; font-family: Consolas"><b>APOD</b></a>
-                <a class="nav-link me-auto" asp-controller="APOD" asp-action="Random"
-                   style="color: cornflowerblue; font-family: Consolas;"><b>Random</b></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3" style="font-family: Consolas">
-            @RenderBody()
-        </main>
-    </div>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+			<div class="container-fluid">
+				<a class="navbar-brand" asp-area="" asp-controller="APOD" asp-action="Index"
+				   style="color: cornflowerblue; font-family: Consolas"><b>APOD</b></a>
+				<a class="nav-link p-2" asp-controller="APOD" asp-action="Random"
+				   style="color: cornflowerblue; font-family: Consolas;"><b>Random</b></a>
+				<a class="nav-link p-2" asp-controller="APOD" asp-action="Calendar"
+				   style="color: cornflowerblue; font-family: Consolas;"><b>Calendar</b></a>
+				<a href="https://github.com/dh1180" class="nav-link ms-auto p-2" style="color: cornflowerblue; font-family: Consolas;"><b>About</b></a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<main role="main" class="pb-3" style="font-family: Consolas">
+			@RenderBody()
+		</main>
+	</div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - APOD - KimDongHyeon
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2023 - APOD - KimDongHyeon
+		</div>
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
