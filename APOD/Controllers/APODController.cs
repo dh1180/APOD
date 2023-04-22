@@ -247,5 +247,10 @@ namespace APOD.Controllers
         {
           return (_context.APODModel?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        public IActionResult Random()
+        {
+            return View();
+        }
     }
 }

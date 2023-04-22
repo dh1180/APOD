@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Random";
+}
+
+<script>
+    function showIframe(img, url) {
+        var container = img.parentElement;
+        var iframe = document.createElement("iframe");
+
+        iframe.src = url;
+        iframe.allowFullscreen = true;
+
+        container.removeChild(img);
+        container.appendChild(iframe);
+    }
+</script>
+
+<div class="container">
+    <h1 class="mb-5" style="color: cornflowerblue;"><b>Random NASA Image</b></h1>
+    <input class="form-control mb-3" type="text" onkeydown="handleKeyDown(event)" placeholder="랜덤으로 출력할 APOD의 개수를 입력하세요" />
+    <div class="row" id="apod-container">
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function handleKeyDown(event) {
+        if (event.key == 'Enter') {
+            const count = event.target.value;
+            $(document).ready(function () {
+                $.ajax({
+                    url: "https://api.nasa.gov/planetary/apod",
+                    method: "GET",
+                    data: {
+                        api_key: "qGLChofuLpstXN2oFvwUGl7nmIdKmRMSy3sEiLuR",
+                        count: count
+                    },
+                    success: function (result) {
+                        $("#apod-container").empty();
+                        for (var i = 0; i < result.length; i++) {
+
+                            var start = '<div class="col-3 mb-5">'
+                                + '<div class="card border-secondary h-100">'
+
+                                + '<div class="media-container">'
+                                + '<img src="' + result[i].url + '" class="card-img-top"'
+                                + 'style="object-fit: cover; height: 150px" onerror="showIframe(this, \'' + result[i].url + '\')"/>'
+                                + '</div>'
+
+                                + '<div class="card-body">'
+                                + '<p class="card-title">' + result[i].title + '</p>'
+                                + '</div>'
+
+
+
+                                + '<div class="card-footer">'
+                                + '<button onclick="handleClick(event)">보기</button>'
+                                + '</div>'
+
+                                + '</div> </div>';
+
+                            $("#apod-container").append(start);
+
+                        }
+
+                    }
+                })
+            })
+        }
+        console.log("123456")
+    }
+</script>

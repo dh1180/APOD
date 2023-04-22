@@ -4,6 +4,19 @@
 	ViewData["Title"] = "Index";
 }
 
+<script>
+	function showIframe(img, url) {
+		var container = img.parentElement;
+		var iframe = document.createElement("iframe");
+
+		iframe.src = url;
+		iframe.allowFullscreen = true;
+
+		container.removeChild(img);
+		container.appendChild(iframe);
+	}
+</script>
+
 <div class="container">
 	<div class="row">
 		<h1 class="mb-5" style="color: cornflowerblue;"><b>NASA Image</b></h1>
@@ -12,21 +25,8 @@
 			<div class=" col-3 mb-5">
 				<div class="card border-secondary h-100">
 
-					<script>
-						function showIframe(img, url) {
-							var container = img.parentElement;
-							var iframe = document.createElement("iframe");
-
-							iframe.src = url;
-							iframe.allowFullscreen = true;
-
-							container.removeChild(img);
-							container.appendChild(iframe);
-						}
-					</script>
-
 					<div class="media-container">
-						<img src="@Html.DisplayFor(item => apod.Url)" class="card-img-top" style="object-fit: cover; width: 300px; height: 150px" onerror="showIframe(this, '@apod.Url')">
+						<img src="@Html.DisplayFor(item => apod.Url)" class="card-img-top" style="object-fit: cover; height: 150px" onerror="showIframe(this, '@apod.Url')">
 					</div>
 
 					<div class="card-body">
