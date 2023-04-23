@@ -20,8 +20,6 @@
 
 		iframe.src = "@Html.DisplayFor(model => model.APOD.Url)";
 		iframe.allowFullscreen = true;
-		iframe.width = "100%";
-		iframe.height = "100%";
 		
 		container.removeChild(img);
 		container.appendChild(iframe);

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+이 파일은 웹 프로젝트의 게시/패키지 프로세스에서 사용됩니다. 이 MSBuild 파일을 편집하여 이 프로세스의 동작을
+사용자 지정할 수 있습니다. 이에 대한 자세한 내용은 https://go.microsoft.com/fwlink/?LinkID=208121을 참조하세요. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxZbl3a58SEKNLkuvy6VGnQAAAAACAAAAAAAQZgAAAAEAACAAAABXg8qSEvc4+EQBcjCmDFhVb1Q69KQHtSNo1Do3l7tLpgAAAAAOgAAAAAIAACAAAAAAnfJr8jKg+GCAMNdzKnNAljobCh0m+Hvcku2UOEbz3oAAAADkyt63NhAl6bDHm9+yDHrSroN8uKDJeJYgKn60wlFzQn33GVLMMUY5MWysFdq8fPnai/sAC5EqXBOFYqXjM0UpaN0ULvxTFnQz7m1aWcUYuW+B06aH+lAzh1qoQO+4fLmAkExd9A16389GmI4LLRC8uLUqQt4p/WHeTzEHye1LKEAAAAAgYtabPb0I8EwOETM4g9IuJlkOh45zGiXurIESXlLuLLb5fB4sq1qpSpTKWakYjgafLevFp0AwFevJlFeLvMw3</EncryptedPassword>
+    <History>True|2023-04-23T09:18:06.7792043Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
