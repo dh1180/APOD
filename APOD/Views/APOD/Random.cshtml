@@ -105,7 +105,12 @@
 
                     },
                     error: function (error) {
-                        alert("Please enter the NUMBER")
+                        if(count > 100) {
+                            alert("Please enter the number LESS THAN 100")
+                        }
+                        else {
+                            alert("Please enter the NUMBER")
+                        }
                     }
 
                 })
