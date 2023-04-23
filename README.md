@@ -4,7 +4,7 @@ APOD api가 갱신될 때마다 APOD 정보(우주의 사진 및 사진에 대�
 * 1995-06-16 부터 현재까지의 APOD 정보를 랜덤으로 원하는만큼 출력할 수 있습니다.
 * 캘린더로 입력한 날짜의 APOD 정보를 가져올 수 있습니다.
 
-https://apod1936.azurewebsites.net/
+https://apod1936.azurewebsites.net
 <br />
 
 # 🌏 왜 만들었나요?
