@@ -33,17 +33,17 @@
 		<div class="card-body container">
 			<div class="row mb-3">
 				<div class="col-1">
-					<input asp-for="New_Comment.Author" class="form-control" placeholder="작성자" />
+					<input asp-for="New_Comment.Author" class="form-control" placeholder="commenter" />
 					<span asp-validation-for="New_Comment.Author" class="text-danger"></span>
 				</div>
 				<div class="col-1">
-					<input asp-for="New_Comment.Password" class="form-control" placeholder="비밀번호" />
+					<input asp-for="New_Comment.Password" class="form-control" placeholder="password" />
 					<span asp-validation-for="New_Comment.Password" class="text-danger"></span>
 				</div>
 
 			</div>
 			<div class="mb-3">
-				<textarea asp-for="New_Comment.Contents" class="form-control" placeholder="댓글 입력.." rows="3"></textarea>
+				<textarea asp-for="New_Comment.Contents" class="form-control" placeholder="Enter a comment.." rows="3"></textarea>
 			</div>
 			<div class="mb-3">
 				<span asp-validation-for="New_Comment.Contents" class="text-danger"></span>
